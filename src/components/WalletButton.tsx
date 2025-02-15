@@ -51,10 +51,12 @@ const WalletButton = () => {
           px: { xs: 1.5, sm: 2 },
           py: 1,
           borderRadius: '24px',
-          minWidth: { xs: 'auto', sm: '180px' },
+          minWidth: { xs: '44px', sm: '180px' },
+          height: '44px',
           transition: 'all 0.3s ease-in-out',
           position: 'relative',
           overflow: 'hidden',
+          whiteSpace: 'nowrap',
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -103,7 +105,10 @@ const WalletButton = () => {
           />
           <Box sx={{ 
             textAlign: 'left',
-            display: { xs: isConnected ? 'none' : 'block', sm: 'block' }
+            display: { xs: isConnected ? 'none' : 'block', sm: 'block' },
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}>
             {isConnected ? (
               <>
@@ -128,7 +133,16 @@ const WalletButton = () => {
                 </Typography>
               </>
             ) : (
-              "ウォレット接続"
+              <Typography 
+                variant="body2"
+                sx={{
+                  fontSize: { xs: '0.875rem', sm: '1rem' },
+                  whiteSpace: 'nowrap',
+                  display: { xs: 'none', sm: 'inline' }
+                }}
+              >
+                ウォレット接続
+              </Typography>
             )}
           </Box>
         </Box>

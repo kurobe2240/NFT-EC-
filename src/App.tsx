@@ -17,15 +17,27 @@ function App() {
       <GlobalStyles
         styles={{
           '*': {
-            WebkitTapHighlightColor: 'transparent',
+            WebkitTapHighlightColor: 'transparent !important',
+            WebkitTouchCallout: 'none !important',
+            WebkitUserSelect: 'none !important',
             '&:focus': {
-              outline: 'none',
+              outline: 'none !important',
             },
           },
-          'button, a': {
-            WebkitTouchCallout: 'none',
-            WebkitUserSelect: 'none',
+          'button, a, [role="button"]': {
+            WebkitTapHighlightColor: 'transparent !important',
+            WebkitTouchCallout: 'none !important',
+            WebkitUserSelect: 'none !important',
             touchAction: 'manipulation',
+            '&:focus': {
+              outline: 'none !important',
+            },
+          },
+          '.MuiButtonBase-root': {
+            WebkitTapHighlightColor: 'transparent !important',
+            '&:focus': {
+              outline: 'none !important',
+            },
           },
         }}
       />
