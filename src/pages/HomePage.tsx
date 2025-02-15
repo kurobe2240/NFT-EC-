@@ -74,9 +74,12 @@ const HomePage = () => {
           <Typography
             variant="body2"
             color="text.secondary"
+            sx={{
+              whiteSpace: 'pre-line',
+              lineHeight: 1.6,
+            }}
           >
-            このサイトはポートフォリオ用のデモサイトです。実際の取引機能は実装されていません。
-            デモ用のウォレットを使用して、NFTの閲覧、カートへの追加、いいねなどの機能をお試しいただけます。
+            {"このサイトはポートフォリオ用のデモサイトです。\n実際の取引機能は実装されていません。\nデモ用のウォレットを使用して、NFTの閲覧、カートへの追加、いいねなどの機能をお試しいただけます。"}
           </Typography>
         </Paper>
         
