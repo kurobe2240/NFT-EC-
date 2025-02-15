@@ -1,5 +1,4 @@
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, CssBaseline, GlobalStyles } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import theme from './theme';
 import Header from './components/Header';
@@ -15,6 +14,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <GlobalStyles
+        styles={{
+          '*': {
+            WebkitTapHighlightColor: 'transparent',
+            '&:focus': {
+              outline: 'none',
+            },
+          },
+          'button, a': {
+            WebkitTouchCallout: 'none',
+            WebkitUserSelect: 'none',
+            touchAction: 'manipulation',
+          },
+        }}
+      />
       <NotificationProvider>
         <WalletProvider>
           <CartProvider>

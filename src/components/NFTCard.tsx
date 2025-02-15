@@ -267,18 +267,28 @@ const NFTCard = ({ nft, onLike, loading = false, isInCart, onCartAction }: NFTCa
         onClick={(e) => e.stopPropagation()}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <IconButton 
+          <IconButton
             onClick={handleLike}
-            color={nft.isLiked ? "error" : "default"}
-            size="medium"
             sx={{
+              p: 1,
+              color: nft.isLiked ? 'error.main' : 'text.secondary',
               transition: 'all 0.2s ease-in-out',
+              WebkitTapHighlightColor: 'transparent',
               '&:hover': {
+                color: 'error.main',
                 transform: 'scale(1.1)',
+              },
+              '&:active': {
+                transform: 'scale(0.95)',
               },
             }}
           >
-            {nft.isLiked ? <Favorite /> : <FavoriteBorder />}
+            <Favorite 
+              sx={{
+                transition: 'transform 0.2s ease-in-out',
+                transform: nft.isLiked ? 'scale(1.1)' : 'scale(1)',
+              }}
+            />
           </IconButton>
           <Typography 
             variant="body2" 

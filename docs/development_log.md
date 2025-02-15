@@ -530,3 +530,147 @@ export const useInputValidation = (initialValues: FormValues, rules: ValidationR
 - src/utils/csrf.ts
 - src/utils/api.ts
 - src/hooks/useInputValidation.ts 
+
+## GitHubとVercelデプロイ作業の記録（2024-02-XX）
+
+### 1. GitHubリポジトリの初期設定
+#### 実施した手順
+1. ローカルリポジトリの初期化
+```bash
+git init
+```
+
+2. `.gitignore`の確認
+```plaintext
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+```
+
+3. 初期コミットの作成
+```bash
+git add .
+git commit -m "初期コミット：NFTマーケットプレイスの基本実装"
+```
+
+4. リモートリポジトリの設定
+```bash
+git remote add origin https://github.com/kurobe2240/NFT-EC-.git
+git push -u origin master
+```
+
+### 2. Vercelデプロイの設定
+#### プロジェクト設定
+1. Framework Preset: `Vite`
+2. Build and Output Settings:
+   - Build Command: `vite build`
+   - Output Directory: `dist`
+   - Install Command: `npm install`
+3. Root Directory: `.`
+
+#### デプロイ結果
+- デプロイURL: 
+  - メインドメイン: `nft-ec.vercel.app`
+  - プロジェクトドメイン: `nft-ec-kurobe2240s-projects.vercel.app`
+- デプロイ時間: 約45秒
+- ビルド成功
+
+### 3. UI改善作業
+#### 実施した変更
+1. 説明文の改行調整
+```typescript
+// src/pages/HomePage.tsx
+<Typography
+  variant="body2"
+  color="text.secondary"
+  sx={{
+    whiteSpace: 'pre-line',
+    lineHeight: 1.6,
+  }}
+>
+  {"このサイトはポートフォリオ用のデモサイトです。\n実際の取引機能は実装されていません。\nデモ用のウォレットを使用して、NFTの閲覧、カートへの追加、いいねなどの機能をお試しいただけます。"}
+</Typography>
+```
+
+2. タブ名の変更
+```html
+<!-- index.html -->
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NFTマーケットプレイス</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+```
+
+### 4. 実装の根拠
+1. 説明文の改行
+   - Material-UIのTypographyコンポーネントのベストプラクティス
+   - 可読性向上のための適切な行間設定
+   - テキストの論理的な区切りに基づく改行
+
+2. タブ名とHTML言語設定
+   - SEO最適化のための適切なメタ情報
+   - 日本語サイトとしての言語設定
+   - ユーザーフレンドリーなタブ表示
+
+### 5. 未解決の課題
+- [ ] faviconの未カスタマイズ
+- [ ] メタ情報の最適化（OGP等）
+- [ ] PWA対応の検討
+- [ ] パフォーマンス最適化
+- [ ] 本番環境でのエラー監視体制
+
+### 6. 次のステップ
+1. デプロイ環境の強化
+   - 環境変数の適切な管理
+   - カスタムドメインの設定
+   - SSL/TLS証明書の設定
+   - CDNの最適化
+
+2. CI/CD パイプラインの整備
+   - GitHub Actionsの設定
+   - テスト自動化
+   - コード品質チェック
+   - デプロイ前の静的解析
+
+### 参考資料・証跡
+- コミット履歴:
+  - 0dde919: 初期コミット
+  - a2bd7b0: UI改善
+- Vercelデプロイログ
+- Material-UI Typography Documentation
+- Vite Deployment Documentation
+
+実装ファイル：
+- src/pages/HomePage.tsx
+- index.html
+- docs/development_log.md 

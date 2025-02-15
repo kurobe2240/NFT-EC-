@@ -145,20 +145,42 @@ const Header = () => {
 
   return (
     <>
-      <Slide appear={false} direction="down" in={!scrolled}>
+      <Box
+        component="header"
+        sx={{
+          position: 'fixed',
+          width: '100%',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: (theme) => theme.zIndex.appBar,
+          transform: !scrolled ? 'translateY(0)' : 'translateY(-100%)',
+          transition: 'transform 0.3s ease-in-out',
+        }}
+      >
         <AppBar
-          position="fixed"
-          color="default"
           elevation={scrolled ? 2 : 0}
           sx={{
-            bgcolor: scrolled 
+            position: 'fixed',
+            top: !scrolled ? 0 : '-100%',
+            left: 0,
+            right: 0,
+            bgcolor: (theme) => scrolled 
               ? 'background.paper' 
               : alpha(theme.palette.background.paper, 0.8),
             backdropFilter: 'blur(8px)',
             transition: 'all 0.3s ease-in-out',
+            borderBottom: 1,
+            borderColor: 'divider'
           }}
         >
-          <Toolbar sx={{ gap: 2 }}>
+          <Toolbar
+            sx={{
+              justifyContent: 'space-between',
+              px: { xs: 1, sm: 2, md: 3 },
+              minHeight: { xs: '56px', sm: '64px' },
+            }}
+          >
             {isMobile && (
               <IconButton
                 color="inherit"
@@ -233,7 +255,14 @@ const Header = () => {
               ))}
             </Box>
 
-            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+            <Box 
+              sx={{ 
+                display: 'flex', 
+                gap: { xs: 0.5, sm: 1 }, 
+                alignItems: 'center',
+                ml: 'auto',
+              }}
+            >
               <Tooltip title="カート">
                 <IconButton 
                   color="inherit" 
@@ -279,9 +308,17 @@ const Header = () => {
             </Box>
           </Toolbar>
         </AppBar>
-      </Slide>
+      </Box>
 
-      <Box component="nav">
+      <Box
+        component="nav"
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: { xs: '100%', sm: 320 },
+            transition: 'width 0.3s ease-in-out',
+          }
+        }}
+      >
         <Drawer
           variant="temporary"
           anchor="left"
@@ -293,7 +330,23 @@ const Header = () => {
           PaperProps={{
             sx: {
               width: { xs: '100%', sm: 320 },
-              transition: 'width 0.3s ease-in-out',
+              '& .MuiListItemButton-root': {
+                py: 2,
+                px: 3,
+                minHeight: 56,
+                '&:active': {
+                  bgcolor: (theme) => alpha(theme.palette.primary.main, 0.2),
+                },
+                '& .MuiListItemIcon-root': {
+                  minWidth: 40,
+                },
+              },
+            },
+          }}
+          SlideProps={{
+            timeout: {
+              enter: 300,
+              exit: 200,
             },
           }}
         >

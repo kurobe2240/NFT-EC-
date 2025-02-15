@@ -48,10 +48,10 @@ const WalletButton = () => {
         onClick={handleClick}
         sx={{
           ...buttonHoverEffect,
-          px: 2,
+          px: { xs: 1.5, sm: 2 },
           py: 1,
           borderRadius: '24px',
-          minWidth: '180px',
+          minWidth: { xs: 'auto', sm: '180px' },
           transition: 'all 0.3s ease-in-out',
           position: 'relative',
           overflow: 'hidden',
@@ -75,7 +75,13 @@ const WalletButton = () => {
           },
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: { xs: 0.5, sm: 1 },
+          width: '100%',
+          justifyContent: { xs: 'center', sm: 'flex-start' }
+        }}>
           <WalletIcon 
             sx={{
               animation: isConnected ? 'none' : 'pulse 1.5s infinite',
@@ -95,13 +101,29 @@ const WalletButton = () => {
               },
             }}
           />
-          <Box sx={{ textAlign: 'left' }}>
+          <Box sx={{ 
+            textAlign: 'left',
+            display: { xs: isConnected ? 'none' : 'block', sm: 'block' }
+          }}>
             {isConnected ? (
               <>
-                <Typography variant="body2" sx={{ fontSize: '0.75rem', opacity: 0.8 }}>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    fontSize: '0.75rem', 
+                    opacity: 0.8,
+                    display: { xs: 'none', sm: 'block' }
+                  }}
+                >
                   {formatBalance(balance)}
                 </Typography>
-                <Typography variant="body2" sx={{ fontSize: '0.75rem' }}>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    fontSize: '0.75rem',
+                    display: { xs: 'none', sm: 'block' }
+                  }}
+                >
                   {`${address?.slice(0, 6)}...${address?.slice(-4)}`}
                 </Typography>
               </>
@@ -128,15 +150,30 @@ const WalletButton = () => {
           sx: {
             mt: 1,
             overflow: 'hidden',
-            width: 280,
-            borderRadius: 2,
+            width: { xs: '100%', sm: 280 },
+            maxWidth: '100%',
+            borderRadius: { xs: '16px 16px 0 0', sm: 2 },
+            position: { xs: 'fixed', sm: 'absolute' },
+            bottom: { xs: 0, sm: 'auto' },
+            left: { xs: 0, sm: 'auto' },
+            right: { xs: 0, sm: 'auto' },
           },
+        }}
+        sx={{
+          '& .MuiBackdrop-root': {
+            backgroundColor: (theme) => alpha(theme.palette.background.paper, 0.2),
+            backdropFilter: 'blur(4px)',
+          },
+        }}
+        transitionDuration={{
+          enter: 300,
+          exit: 200,
         }}
       >
         <Paper
           elevation={0}
           sx={{
-            p: 2,
+            p: { xs: 3, sm: 2 },
             background: (theme) => alpha(theme.palette.background.paper, 0.8),
             backdropFilter: 'blur(8px)',
           }}
@@ -153,6 +190,7 @@ const WalletButton = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                touchAction: 'manipulation',
               }}
             >
               <Box>
@@ -175,6 +213,10 @@ const WalletButton = () => {
             sx={{
               ...buttonHoverEffect,
               borderRadius: '12px',
+              py: { xs: 1.5, sm: 1 },
+              '&:active': {
+                transform: 'scale(0.98)',
+              },
             }}
           >
             切断する
