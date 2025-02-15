@@ -296,190 +296,292 @@ const SearchFilters = ({ value, onChange }: SearchFiltersProps) => {
           sx={{ 
             mt: 3,
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 3,
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+            gap: 2,
             width: '100%',
-            maxWidth: '1200px',
-            mx: 'auto',
           }}
         >
-          <FormControl>
-            <InputLabel>カテゴリ</InputLabel>
+          <FormControl fullWidth>
             <Select
               value={value.category}
-              label="カテゴリ"
               onChange={handleCategoryChange}
-              sx={{ 
-                '& .MuiSelect-select': { 
-                  py: 1.5,
+              displayEmpty
+              sx={{
+                borderRadius: '12px',
+                '& .MuiSelect-select': {
                   display: 'flex',
                   alignItems: 'center',
                   gap: 1,
+                  py: 1.5,
+                  paddingRight: '32px !important',
+                },
+                '& .MuiSelect-icon': {
+                  right: 8,
+                  top: 'calc(50% - 12px)',
                 },
               }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    borderRadius: 2,
+                    mt: 1,
+                    maxHeight: '60vh',
+                  },
+                },
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                },
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'left',
+                },
+              }}
+              startAdornment={<Category sx={{ ml: 1, color: 'primary.main', flexShrink: 0 }} />}
             >
-              {CATEGORIES.map(category => (
-                <MenuItem 
-                  key={category.value} 
-                  value={category.value}
-                  sx={{ 
-                    py: 1.5,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                  }}
-                >
-                  {category.icon}
-                  {category.label}
+              <MenuItem value="">
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 1, 
+                  width: '100%', 
+                  pr: 3,
+                  minHeight: '40px',
+                }}>
+                  <Typography noWrap>カテゴリ: すべて</Typography>
+                </Box>
+              </MenuItem>
+              {CATEGORIES.map((cat) => (
+                <MenuItem key={cat.value} value={cat.value}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', pr: 4 }}>
+                    <Typography>{cat.label}</Typography>
+                  </Box>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
 
-          <FormControl>
-            <InputLabel>スタイル</InputLabel>
+          <FormControl fullWidth>
             <Select
               value={value.style}
-              label="スタイル"
               onChange={handleStyleChange}
-              sx={{ 
-                '& .MuiSelect-select': { 
-                  py: 1.5,
+              displayEmpty
+              sx={{
+                borderRadius: '12px',
+                '& .MuiSelect-select': {
                   display: 'flex',
                   alignItems: 'center',
                   gap: 1,
+                  py: 1.5,
+                },
+                '& .MuiSelect-icon': {
+                  right: 12,
                 },
               }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    borderRadius: 2,
+                    mt: 1,
+                  },
+                },
+              }}
+              startAdornment={<Palette sx={{ ml: 1, color: 'secondary.main' }} />}
             >
-              {STYLES.map(style => (
-                <MenuItem 
-                  key={style.value} 
-                  value={style.value}
-                  sx={{ 
-                    py: 1.5,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                  }}
-                >
-                  {style.icon}
-                  {style.label}
+              <MenuItem value="">
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', pr: 4 }}>
+                  <Typography>スタイル: すべて</Typography>
+                </Box>
+              </MenuItem>
+              {STYLES.map((s) => (
+                <MenuItem key={s.value} value={s.value}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', pr: 4 }}>
+                    <Typography>{s.label}</Typography>
+                  </Box>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
 
-          <FormControl>
-            <InputLabel>レアリティ</InputLabel>
+          <FormControl fullWidth>
             <Select
               value={value.rarity}
-              label="レアリティ"
               onChange={handleRarityChange}
-              sx={{ 
-                '& .MuiSelect-select': { 
-                  py: 1.5,
+              displayEmpty
+              sx={{
+                borderRadius: '12px',
+                '& .MuiSelect-select': {
                   display: 'flex',
                   alignItems: 'center',
                   gap: 1,
+                  py: 1.5,
+                },
+                '& .MuiSelect-icon': {
+                  right: 12,
                 },
               }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    borderRadius: 2,
+                    mt: 1,
+                  },
+                },
+              }}
+              startAdornment={<Star sx={{ ml: 1, color: 'success.main' }} />}
             >
-              {RARITY.map(rarity => (
-                <MenuItem 
-                  key={rarity.value} 
-                  value={rarity.value}
-                  sx={{ 
-                    py: 1.5,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                  }}
-                >
-                  {rarity.icon}
-                  {rarity.label}
+              <MenuItem value="">
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', pr: 4 }}>
+                  <Typography>レアリティ: すべて</Typography>
+                </Box>
+              </MenuItem>
+              {RARITY.map((r) => (
+                <MenuItem key={r.value} value={r.value}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', pr: 4 }}>
+                    <Typography>{r.label}</Typography>
+                  </Box>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
 
-          <FormControl>
-            <InputLabel>並び替え</InputLabel>
+          <FormControl fullWidth>
             <Select
               value={value.sortBy}
-              label="並び替え"
               onChange={handleSortChange}
-              sx={{ 
-                '& .MuiSelect-select': { 
-                  py: 1.5,
+              displayEmpty
+              sx={{
+                borderRadius: '12px',
+                '& .MuiSelect-select': {
                   display: 'flex',
                   alignItems: 'center',
                   gap: 1,
+                  py: 1.5,
+                },
+                '& .MuiSelect-icon': {
+                  right: 12,
                 },
               }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    borderRadius: 2,
+                    mt: 1,
+                  },
+                },
+              }}
+              startAdornment={<Sort sx={{ ml: 1, color: 'info.main' }} />}
             >
-              {SORT_OPTIONS.map(option => (
-                <MenuItem 
-                  key={option.value} 
-                  value={option.value}
-                  sx={{ 
-                    py: 1.5,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                  }}
-                >
-                  <Sort />
-                  {option.label}
+              <MenuItem value="">
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', pr: 4 }}>
+                  <Typography>並び替え: 新着順</Typography>
+                </Box>
+              </MenuItem>
+              {SORT_OPTIONS.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%', pr: 4 }}>
+                    <Typography>{option.label}</Typography>
+                  </Box>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
 
-          <Box 
-            sx={{ 
-              gridColumn: '1 / -1',
-              mt: 1,
-              px: 2,
-            }}
-          >
+          <Box sx={{ mt: 4, px: 2 }}>
             <Typography 
-              gutterBottom
-              sx={{
+              variant="subtitle2" 
+              color="text.secondary"
+              sx={{ 
+                mb: 2,
                 display: 'flex',
                 alignItems: 'center',
                 gap: 1,
-                color: 'text.secondary',
-                mb: 2,
               }}
             >
-              <LocalOffer fontSize="small" />
+              <LocalOffer sx={{ fontSize: '1.25rem', color: 'primary.main' }} />
               価格範囲 (Ξ)
             </Typography>
-            <Slider
-              value={localPriceRange}
-              onChange={handlePriceChange}
-              min={0}
-              max={10}
-              step={0.1}
-              marks={[
-                { value: 0, label: '0 Ξ' },
-                { value: 5, label: '5 Ξ' },
-                { value: 10, label: '10 Ξ' },
-              ]}
-              valueLabelDisplay="on"
-              valueLabelFormat={(value) => `${value} Ξ`}
-              sx={{
-                '& .MuiSlider-thumb': {
-                  transition: 'transform 0.2s ease-in-out',
-                  '&:hover': {
-                    transform: 'scale(1.2)',
+            <Box sx={{ px: 1 }}>
+              <Slider
+                value={localPriceRange}
+                onChange={handlePriceChange}
+                min={0}
+                max={10}
+                step={0.1}
+                marks={[
+                  { value: 0, label: '0 Ξ' },
+                  { value: 5, label: '5 Ξ' },
+                  { value: 10, label: '10 Ξ' },
+                ]}
+                sx={{
+                  '& .MuiSlider-thumb': {
+                    width: 28,
+                    height: 28,
+                    '&:hover, &.Mui-focusVisible': {
+                      boxShadow: '0 0 0 8px rgba(25, 118, 210, 0.16)',
+                    },
+                    '&.Mui-active': {
+                      width: 34,
+                      height: 34,
+                    },
                   },
-                },
-                '& .MuiSlider-track': {
-                  transition: 'background-color 0.3s ease-in-out',
-                },
-              }}
-            />
+                  '& .MuiSlider-rail': {
+                    opacity: 0.32,
+                  },
+                  '& .MuiSlider-mark': {
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                  },
+                  '& .MuiSlider-markLabel': {
+                    fontSize: '0.875rem',
+                    fontWeight: 500,
+                    mt: 0.5,
+                  },
+                }}
+              />
+              <Box
+                sx={{
+                  mt: 2,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: 2,
+                }}
+              >
+                <Paper
+                  elevation={0}
+                  sx={{
+                    p: 1,
+                    borderRadius: 1,
+                    bgcolor: 'action.hover',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 0.5,
+                  }}
+                >
+                  <Typography variant="body2" color="text.secondary">
+                    {localPriceRange[0].toFixed(1)} Ξ
+                  </Typography>
+                </Paper>
+                <Typography variant="body2" color="text.secondary">-</Typography>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    p: 1,
+                    borderRadius: 1,
+                    bgcolor: 'action.hover',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 0.5,
+                  }}
+                >
+                  <Typography variant="body2" color="text.secondary">
+                    {localPriceRange[1].toFixed(1)} Ξ
+                  </Typography>
+                </Paper>
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Collapse>
